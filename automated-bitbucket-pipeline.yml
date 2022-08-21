@@ -50,3 +50,27 @@ pipelines:
                     FUNCTION_NAME: 'generic-dataPoints-function-dev-api'
                     COMMAND: 'update'
                     ZIP_FILE: 'code.zip'
+      master:
+            - step:
+                name: Build and package
+                caches:
+                  - node
+                script:
+                  - npm install
+                  - apt-get update && apt-get install -y zip
+                  - zip -r code.zip  . -x *.git* bitbucket-pipelines.yml
+                artifacts:
+                  - code.zip
+            - step:
+                name: Update Lambda code
+                caches:
+                    - node
+                script:
+                  - pipe: atlassian/aws-lambda-deploy:0.2.1
+                    variables:
+                      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+                      FUNCTION_NAME: 'generic-dataPoints-function-prod-api'
+                      COMMAND: 'update'
+                      ZIP_FILE: 'code.zip'                    
