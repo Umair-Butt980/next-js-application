@@ -43,12 +43,24 @@ export const cookieParser = async () => {
       return acc;
     }, {});
 };
+
 export const generateNewCookie = async () => {
   try {
     var base_url = localStorage.getItem("Origin");
     // console.log(base_url, "<==========baseURL====>");
     let newCookie = "endpoint to generate new cookie";
     console.log(newCookie, "<===New Cookie===>");
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const decodeCokie = async (rdCookie) => {
+  try {
+    let cookieValue = rdCookie.split("=");
+    let token = await axios.post("endpoint to generate token", {
+      cookie: cookieValue[1],
+    });
+    localStorage.setItem("token", token.data.token);
   } catch (error) {
     console.log(error);
   }
