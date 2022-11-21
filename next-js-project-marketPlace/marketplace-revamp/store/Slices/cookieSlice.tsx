@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 export const CookieSlice = createSlice({
   name: "cookie",
@@ -41,6 +42,16 @@ export const cookieParser = async () => {
       acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
       return acc;
     }, {});
+};
+export const generateNewCookie = async () => {
+  try {
+    var base_url = localStorage.getItem("Origin");
+    // console.log(base_url, "<==========baseURL====>");
+    let newCookie = "endpoint to generate new cookie";
+    console.log(newCookie, "<===New Cookie===>");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default CookieSlice.reducer;
