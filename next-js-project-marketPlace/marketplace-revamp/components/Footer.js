@@ -5,7 +5,7 @@ export default function Footer() {
       <div className={`sm:px-6 lg:px-8`}>
         <div className="my-8">
           <p className="text-sm text-secondary-400 text-center">
-            Copyright 2022 RepairDesk, Inc. All rights reserved.
+            Copyright 2022 testing, Inc. All rights reserved.
           </p>
         </div>
       </div>
